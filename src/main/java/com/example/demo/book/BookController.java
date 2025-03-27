@@ -15,15 +15,23 @@ public class BookController {
     public List<Book> getBooks() {
         return bookService.getAllBooks();
     }
+
     @RequestMapping("/book/{id}")
     public Book getBook(@PathVariable int id) {
         return bookService.getBook(id);
     }
+
     @RequestMapping(value = "/book",method = RequestMethod.POST)
     public void addBook(@RequestBody Book book) {
-        System.out.println(book);
         bookService.addBook(book);
     }
-//    @RequestMapping("/book/id")
-//    public void deleteBook
+
+    @RequestMapping(value = "/book/{id}",method = RequestMethod.PUT)
+    public void updateBook(@PathVariable int id,@RequestBody Book book) {
+        bookService.updateBook(id, book);
+    }
+    @RequestMapping(value = "/book/{id}", method = RequestMethod.DELETE)
+    public void deleteBook(@PathVariable int id) {
+        bookService.deleteBook(id);
+    }
 }

@@ -27,7 +27,19 @@ public class BookService {
         books.add(book);
     }
 
-    public void removeBook(Book book) {
-        books.remove(book);
+    public void deleteBook(int id) {
+        for (int i=0; i< books.size(); i++)
+            if(books.get(i).getId() == id) {
+                books.remove(i);
+                return;
+            }
+    }
+
+    public void updateBook(int id, Book book) {
+        for (int i=0; i< books.size(); i++)
+            if(books.get(i).getId() == id) {
+                books.set(i, book);
+                return;
+            }
     }
 }
