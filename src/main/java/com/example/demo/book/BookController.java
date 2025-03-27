@@ -15,7 +15,7 @@ public class BookController {
     public List<Book> getBooks() {
         return bookService.getAllBooks();
     }
-
+//
     @RequestMapping("/book/{id}")
     public Book getBook(@PathVariable int id) {
         return bookService.getBook(id);
@@ -25,10 +25,10 @@ public class BookController {
     public void addBook(@RequestBody Book book) {
         bookService.addBook(book);
     }
-
+//
     @RequestMapping(value = "/book/{id}",method = RequestMethod.PUT)
-    public void updateBook(@PathVariable int id,@RequestBody Book book) {
-        bookService.updateBook(id, book);
+    public void updateBook(@RequestBody Book book) {
+        bookService.updateBook(book);
     }
     @RequestMapping(value = "/book/{id}", method = RequestMethod.DELETE)
     public void deleteBook(@PathVariable int id) {

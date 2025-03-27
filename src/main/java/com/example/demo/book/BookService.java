@@ -1,5 +1,6 @@
 package com.example.demo.book;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -9,37 +10,34 @@ import java.util.List;
 @Service
 public class BookService {
 
-    private List<Book> books = new ArrayList<>(Arrays.asList(
-            new Book("hoho","huhu",1),
-            new Book("lili","lala",2),
-            new Book("soth","lilo",3)
-    ));
+    @Autowired
+    private BookRepository bookRepository;
+//
+//    private List<Book> books = new ArrayList<>(Arrays.asList(
+//            new Book("hoho","huhu",1),
+//            new Book("lili","lala",2),
+//            new Book("soth","lilo",3)
+//    ));
 
     public List<Book> getAllBooks() {
+        List<Book> books = new ArrayList<>();
+        bookRepository.findAll().forEach(books::add);
         return books;
     }
-
+//
     public Book getBook(int id) {
-        return books.stream().filter(b -> b.getId() == id).findFirst().get();
+        return bookRepository.findById(id).get();
     }
 
     public void addBook(Book book) {
-        books.add(book);
+        bookRepository.save(book);
     }
 
     public void deleteBook(int id) {
-        for (int i=0; i< books.size(); i++)
-            if(books.get(i).getId() == id) {
-                books.remove(i);
-                return;
-            }
+        bookRepository.deleteById(id);
     }
 
-    public void updateBook(int id, Book book) {
-        for (int i=0; i< books.size(); i++)
-            if(books.get(i).getId() == id) {
-                books.set(i, book);
-                return;
-            }
+    public void updateBook(Book book) {
+        bookRepository.save(book);
     }
 }

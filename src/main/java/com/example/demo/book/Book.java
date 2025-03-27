@@ -1,9 +1,15 @@
 package com.example.demo.book;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 public class Book {
+
+    @Id
+    private int id;
     private String name;
     private String author;
-    private int id;
 
 
     public Book(String name, String author, int id) {
